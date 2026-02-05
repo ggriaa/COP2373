@@ -54,8 +54,8 @@ def sell_tickets() -> int:
     while total_tickets > 0:
         # Collect user input as a string first
         request_raw = input(
-            f"How many tickets would you like to buy (1-{MAX_PER_BUYER})? "
-            f"Tickets remaining: {total_tickets}: "
+            f"Enter the amount of tickets would you like to purchase (1-{MAX_PER_BUYER})? "
+            f"Tickets left still: {total_tickets}: "
         )
 
         # Convert input to an integer if possible
