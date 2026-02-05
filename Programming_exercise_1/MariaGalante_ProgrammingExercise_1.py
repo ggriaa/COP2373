@@ -13,7 +13,7 @@ Date: 2026-01-21
 """
 
 
-MAX_TICKETS = 20
+MAX_TICKETS = 10
 MAX_PER_BUYER = 4
 
 
