@@ -51,7 +51,7 @@ def get_expenses():
     expenses = []
 
     while True:
-        # Ask user for expense name (strip spaces so it doesn't save weird input)
+        # Ask user for expense name
         expense_type = input("Enter expense type: ").strip()
 
         # Make sure the user enters a valid number for the amount
@@ -62,7 +62,7 @@ def get_expenses():
             try:
                 amount = float(amount_raw)
 
-                # Negative expenses don't make sense for this assignment
+                # make sure only numbers above 0 are entered
                 if amount < 0:
                     print("Please enter a non-negative amount.")
                     continue
@@ -71,13 +71,13 @@ def get_expenses():
             except ValueError:
                 print("Please enter a valid number for the amount.")
 
-        # Store expense as a tuple (type, amount)
+        # Store expense as a tuple
         expenses.append((expense_type, amount))
 
         # Ask user if they want to continue
         more = input("Do you want to add another expense? (y/n): ").strip().lower()
 
-        # Treat anything other than 'y' as no, so the program doesn't get stuck
+        # Treat anything other than 'y' as no, so the program doesn't crash
         if more != "y":
             break
 
@@ -158,10 +158,10 @@ def find_lowest(expenses):
     Tuple containing lowest expense name and amount.
     """
 
-    # Use reduce to compare each expense and keep the smallest amount
+    # Use reduce to compare each expense and keep the smallest one
     lowest = reduce(lambda a, b: a if a[1] < b[1] else b, expenses)
 
-    # Return the lowest expense tuple (name and amount)
+    # Return the lowest expense tuple
     return lowest
 
 
@@ -184,10 +184,10 @@ def main():
     None
     """
 
-    # Display program title so user knows what the program does
+    # Display program title
     print("Monthly Expense Tracker")
 
-    # Call function to collect all expenses from the user
+    # Call function to get all expenses from the user
     expenses = get_expenses()
 
     # Calculate the total of all expenses entered
@@ -199,13 +199,12 @@ def main():
     # Find the lowest expense entered
     lowest = find_lowest(expenses)
 
-    # Display formatted results for the user
+    # Display results for the user
     print("\nExpense Summary")
     print(f"Total Expenses: ${total:.2f}")
     print(f"Highest Expense: {highest[0]} - ${highest[1]:.2f}")
     print(f"Lowest Expense: {lowest[0]} - ${lowest[1]:.2f}")
 
 
-# Ensures program runs only when file is executed directly
 if __name__ == "__main__":
     main()
