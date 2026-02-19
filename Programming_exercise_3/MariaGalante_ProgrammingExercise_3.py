@@ -1,10 +1,17 @@
 """
-Program: Monthly Expense Analyzer
-Author: Maria
-Description:
-This program asks the user to enter their monthly expenses by type and amount.
-It then uses the reduce() method to calculate the total expenses and find the
-highest and lowest expense entered by the user.
+Monthly Expense Analyzer (Programming Exercise 3)
+
+Rules:
+- Ask the user to enter their monthly expenses
+- User must enter the type of expense and the amount
+- Continue asking until the user chooses to stop
+- Use reduce() to calculate the total expenses
+- Use reduce() to find the highest expense
+- Use reduce() to find the lowest expense
+- Display the total, highest, and lowest expenses clearly
+
+Student: Maria Galante
+Date: 2026-02-18
 """
 
 # Import reduce to be able to calculate totals and compare expenses
@@ -15,23 +22,24 @@ def get_expenses():
     """
     Description:
     This function asks the user to enter their monthly expenses.
-    The user enters the name of the expense and the amount. The function keeps
-    asking until the user chooses to stop.
+    The user enters the expense type and the amount. The function keeps asking
+    until the user chooses to stop.
 
     Parameters:
     None
 
     Variables:
-    expenses (list) - stores all expenses as tuples
+    expenses (list) - stores all expenses as tuples (expense_type, amount)
     expense_type (str) - the name of the expense
     amount (float) - cost of the expense
     more (str) - controls whether the loop continues
+    amount_raw (str) - raw user input before converting to float
 
     Steps:
     1. Create an empty list to store expenses.
     2. Ask the user for the expense type.
-    3. Ask the user for the expense amount.
-    4. Store both values as a tuple in the list.
+    3. Ask the user for the expense amount and validate it is a number.
+    4. Store the expense type and amount as a tuple in the list.
     5. Ask if they want to enter another expense.
     6. Repeat until the user enters 'n'.
     7. Return the list of expenses.
@@ -43,22 +51,39 @@ def get_expenses():
     expenses = []
 
     while True:
-        # Ask user for expense name
-        expense_type = input("Enter expense type: ")
+        # Ask user for expense name (strip spaces so it doesn't save weird input)
+        expense_type = input("Enter expense type: ").strip()
 
-        # Ask user for expense amount
-        amount = float(input("Enter amount: $"))
+        # Make sure the user enters a valid number for the amount
+        while True:
+            # Ask user for expense amount
+            amount_raw = input("Enter amount: $").strip()
 
-        # Store expense as tuple
+            try:
+                amount = float(amount_raw)
+
+                # Negative expenses don't make sense for this assignment
+                if amount < 0:
+                    print("Please enter a non-negative amount.")
+                    continue
+
+                break
+            except ValueError:
+                print("Please enter a valid number for the amount.")
+
+        # Store expense as a tuple (type, amount)
         expenses.append((expense_type, amount))
 
-        # Ask user if they want to continue or not
-        more = input("Do you want to add another expense? (y/n): ").lower()
-        if more != 'y':
+        # Ask user if they want to continue
+        more = input("Do you want to add another expense? (y/n): ").strip().lower()
+
+        # Treat anything other than 'y' as no, so the program doesn't get stuck
+        if more != "y":
             break
 
-    # Return the list of expenses back to the main program
+    # Return the completed list of expenses back to the main program
     return expenses
+
 
 def calculate_total(expenses):
     """
@@ -84,6 +109,7 @@ def calculate_total(expenses):
 
     # Return the total expense amount
     return total
+
 
 def find_highest(expenses):
     """
@@ -158,10 +184,10 @@ def main():
     None
     """
 
-    # Display program title
+    # Display program title so user knows what the program does
     print("Monthly Expense Tracker")
 
-    # Call function to get all expenses from the user
+    # Call function to collect all expenses from the user
     expenses = get_expenses()
 
     # Calculate the total of all expenses entered
@@ -173,12 +199,13 @@ def main():
     # Find the lowest expense entered
     lowest = find_lowest(expenses)
 
-    # Display results for the user
+    # Display formatted results for the user
     print("\nExpense Summary")
     print(f"Total Expenses: ${total:.2f}")
     print(f"Highest Expense: {highest[0]} - ${highest[1]:.2f}")
     print(f"Lowest Expense: {lowest[0]} - ${lowest[1]:.2f}")
 
 
+# Ensures program runs only when file is executed directly
 if __name__ == "__main__":
     main()
