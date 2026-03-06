@@ -122,12 +122,11 @@ def main():
     zip_code (str) - ZIP code entered by the user
 
     Steps:
-    1. Run test examples.
-    2. Ask the user to enter a phone number.
-    3. Ask the user to enter a social security number.
-    4. Ask the user to enter a ZIP code.
-    5. Validate each input.
-    6. Display whether each input is valid or invalid.
+    1. Ask the user to enter a phone number.
+    2. Ask the user to enter a social security number.
+    3. Ask the user to enter a ZIP code.
+    4. Validate each input.
+    5. Display whether each input is valid or invalid.
 
     Returns:
     None
