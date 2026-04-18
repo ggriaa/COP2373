@@ -50,7 +50,7 @@ def write_grades():
 
     # open the file in write mode
     # newline="" keeps blank lines from showing up in csv files on Windows
-    with open("grades.csv", "w", newline="") as file:
+    with open("../Programming_exercise_12/grades.csv", "w", newline="") as file:
 
         # create csv writer object
         writer = csv.writer(file)
@@ -105,7 +105,7 @@ def read_grades():
     print("\nStudent Grades Table\n")
 
     # open file in read mode
-    with open("grades.csv", "r", newline="") as file:
+    with open("../Programming_exercise_12/grades.csv", "r", newline="") as file:
 
         # create reader object
         reader = csv.reader(file)
